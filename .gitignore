@@ -7,3 +7,6 @@ __pycache__/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# Luck Be a Landlord save files
+*.save

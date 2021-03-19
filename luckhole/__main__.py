@@ -1,3 +1,4 @@
+from . import Save
 from argparse import ArgumentParser
 
 def parse_args() -> str:
@@ -11,7 +12,8 @@ def parse_args() -> str:
 
 def main(savefile: str) -> None:
     with open(savefile, "r+") as file:
-        print(file.read())
+        save = Save(file.read())
+        print(save)
 
 if __name__ == "__main__":
     main(parse_args())

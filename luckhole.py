@@ -10,7 +10,8 @@ def parse_args() -> str:
     return parser.parse_args().savefile
 
 def main(savefile: str) -> None:
-    pass
+    with open(savefile, "r+") as file:
+        print(file.read())
 
 if __name__ == "__main__":
-    main(*parse_args())
+    main(parse_args())

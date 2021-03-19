@@ -5,7 +5,7 @@ def parse_args() -> str:
     parser.add_argument(
         "savefile",
         type = str,
-        help = "path to savefile, such as \"LBAL.save\""
+        help = "path to savefile, such as `LBAL.save`"
     )
     return parser.parse_args().savefile
 

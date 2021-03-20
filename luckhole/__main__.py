@@ -1,19 +1,30 @@
+"""
+a save editor for Luck Be a Landlord
+"""
+
 from . import Save
 from argparse import ArgumentParser
 
-def parse_args() -> str:
+def parse_args() -> tuple[str, str]:
     parser = ArgumentParser(description = __doc__)
     parser.add_argument(
-        "savefile",
+        "insavefile",
         type = str,
-        help = "path to savefile, such as `LBAL.save`"
+        help = "path to input savefile to edit, such as `LBAL.save`"
     )
-    return parser.parse_args().savefile
+    parser.add_argument(
+        "outsavefile",
+        type = str,
+        help = "path to write the savefile edit to (can be same as insavefile)"
+    )
+    args = parser.parse_args()
+    return args.insavefile, args.outsavefile
 
-def main(savefile: str) -> None:
-    with open(savefile, "r+") as file:
-        save = Save(file.read())
-        print(save)
+def main(insavefile: str, outsavefile: str) -> None:
+    with open(insavefile, "r") as ifile:
+        save = Save(ifile.read())
+    with open(outsavefile, "w") as ofile:
+        ofile.write(str(save).strip() + "\n")
 
 if __name__ == "__main__":
-    main(parse_args())
+    main(*parse_args())

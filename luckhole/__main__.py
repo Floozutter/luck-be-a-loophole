@@ -1,5 +1,5 @@
 """
-a save editor for Luck Be a Landlord
+a save editor for Luck Be a Landlord!
 """
 
 from . import Save

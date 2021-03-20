@@ -23,6 +23,7 @@ def parse_args() -> tuple[str, str]:
 def main(insavefile: str, outsavefile: str) -> None:
     with open(insavefile, "r") as ifile:
         save = Save(ifile.read())
+    save.coins = 2**32
     with open(outsavefile, "w") as ofile:
         ofile.write(str(save).strip() + "\n")
 

@@ -11,3 +11,15 @@ class Save:
     @coins.setter
     def coins(self, value: int) -> None:
         self.data[2]["coins"] = value
+    @property
+    def removals(self) -> int:
+        return int(self.data[9]["removal_tokens"])
+    @removals.setter
+    def removals(self, value: int) -> None:
+        self.data[9]["removal_tokens"] = value
+    @property
+    def rerolls(self) -> int:
+        return int(self.data[9]["reroll_tokens"])
+    @rerolls.setter
+    def rerolls(self, value: int) -> None:
+        self.data[9]["reroll_tokens"] = value

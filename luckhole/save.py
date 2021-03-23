@@ -23,3 +23,7 @@ class Save:
     @rerolls.setter
     def rerolls(self, value: int) -> None:
         self.data[9]["reroll_tokens"] = value
+    def enqueue_item(self, item: str) -> None:
+        self.data[9]["queued_items"].append(item)
+    def enqueue_symbol(self, symbol: str) -> None:
+        self.data[9]["queued_symbols"].append(symbol)

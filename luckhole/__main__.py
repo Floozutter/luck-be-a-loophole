@@ -30,9 +30,9 @@ def prompt(
 ) -> str:
     text = f"{name} [{default}]: " if default is not None else f"{name}: "
     while True:
-        value = input(text)
+        value = input(text).lower()
         if default is not None and not value:
-            return default
+            return default.lower()
         elif valid(value):
             return value
 

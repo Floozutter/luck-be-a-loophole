@@ -34,12 +34,31 @@ def prompt(
         elif valid(value):
             return value
 
-def main(insavefile: str, outsavefile: str) -> None:
-    with open(insavefile, "r") as ifile:
-        save = Save(ifile.read())
+def menu(save: Save) -> None:
+    """handles main menu i/o. returns True to write, and False to discard."""
     save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
-    with open(outsavefile, "w") as ofile:
-        ofile.write(str(save).strip() + "\n")
+    return True
+
+def main(insavefile: str, outsavefile: str) -> None:
+    # read encoded save from insavefile
+    print(f"reading from `{insavefile}`...", end = " ")
+    with open(insavefile, "r") as ifile:
+        itext = ifile.read()
+    print("done.")
+    # decode input save
+    print(f"decoding data...", end = " ")
+    save = Save(itext)
+    print("done.")
+    # edit save with menu
+    write = menu(save)
+    # write edited save to outsavefile
+    if write:
+        print(f"writing to `{outsavefile}`...", end = " ")
+        with open(outsavefile, "w") as ofile:
+            ofile.write(str(save).strip() + "\n")
+        print("done.")
+    else:
+        print(f"edit discarded without write.")
 
 if __name__ == "__main__":
     main(*parse_args())

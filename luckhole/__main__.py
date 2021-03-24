@@ -3,7 +3,9 @@ a save editor for Luck Be a Landlord!
 """
 
 from . import Save
+from json import JSONDecodeError
 from argparse import ArgumentParser
+from sys import exit
 from typing import Callable, Optional
 
 def parse_args() -> tuple[str, str]:
@@ -39,26 +41,44 @@ def menu(save: Save) -> None:
     save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
     return True
 
-def main(insavefile: str, outsavefile: str) -> None:
+def main(insavefile: str, outsavefile: str) -> int:
     # read encoded save from insavefile
     print(f"reading from `{insavefile}`...", end = " ")
-    with open(insavefile, "r") as ifile:
-        itext = ifile.read()
-    print("done.")
+    try:
+        with open(insavefile, "r") as ifile:
+            itext = ifile.read()
+    except OSError as e:
+        print(f"os error: `{e}`!")
+        return 1
+    else:
+        print("done.")
     # decode input save
     print(f"decoding data...", end = " ")
-    save = Save(itext)
-    print("done.")
+    try:
+        save = Save(itext)
+    except JSONDecodeError as e:
+        print(f"decode error: `{e}`!")
+        return 1
+    else:
+        print("done.")
     # edit save with menu
+    print("entering edit menu...", end = "\n\n")
     write = menu(save)
-    # write edited save to outsavefile
+    print()
+    # write edited save to outsavefile if not discarded
     if write:
         print(f"writing to `{outsavefile}`...", end = " ")
-        with open(outsavefile, "w") as ofile:
-            ofile.write(str(save).strip() + "\n")
-        print("done.")
+        try:
+            with open(outsavefile, "w") as ofile:
+                ofile.write(str(save).strip() + "\n")
+        except OSError as e:
+            print(f"os error: `{e}`!")
+            return 1
+        else:
+            print("done. >:3c")
     else:
         print(f"edit discarded without write.")
+    return 0
 
 if __name__ == "__main__":
-    main(*parse_args())
+    exit(main(*parse_args()))

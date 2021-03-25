@@ -60,7 +60,7 @@ def menu(save: Save) -> bool:
             return False
         elif option == "write":
             return True
-        elif option in OPTIONS:
+        else:
             print("sorry, not implemented yet!")
     raise AssertionError("how did you get here?")
 

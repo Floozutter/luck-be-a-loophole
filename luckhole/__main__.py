@@ -41,24 +41,29 @@ OPTIONS = {
     "coins": "edit number of coins",
     "removals": "edit number of removal tokens",
     "rerolls": "edit number of reroll tokens",
-    "enqueue-item": "enqueue an item by name",
-    "enqueue-symbol": "enqueue a symbol by name",
+    "enqueue_item": "enqueue an item by name",
+    "enqueue_symbol": "enqueue a symbol by name",
     "discard": "exit without writing to outsavefile",
     "write": "exit and write to outsavefile",
 }
 def menu(save: Save) -> bool:
     """handles main menu i/o. returns True to write, and False to discard."""
+    is_nat = lambda s: s.isdigit()
     while True:
         option = prompt("\noption", "help", lambda s: s in OPTIONS)
         if option == "help":
             for k, v in OPTIONS.items():
                 print(f"{k:<{max(map(len, OPTIONS))}} - {v}")
         elif option == "coins":
-            save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
+            save.coins = int(prompt("coins", str(save.coins), is_nat))
         elif option == "removals":
-            save.removals = int(prompt("removals", str(save.removals), lambda s: s.isdigit()))
+            save.removals = int(prompt("removal tokens", str(save.removals), is_nat))
         elif option == "rerolls":
-            save.rerolls = int(prompt("rerolls", str(save.rerolls), lambda s: s.isdigit()))
+            save.rerolls = int(prompt("reroll tokens", str(save.rerolls), is_nat))
+        elif option == "enqueue_item":
+            save.enqueue_item(prompt("item name"))
+        elif option == "enqueue_symbol":
+            save.enqueue_symbol(prompt("symbol name"))
         elif option == "discard":
             return False
         elif option == "write":

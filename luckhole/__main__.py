@@ -52,8 +52,8 @@ def menu(save: Save) -> bool:
     while True:
         option = prompt("\noption", "help", lambda s: s in OPTIONS)
         if option == "help":
-            for opt, description in OPTIONS.items():
-                print(f"{opt:<{OPTIONS_PAD}} - {description}")
+            for k, v in OPTIONS.items():
+                print(f"{k:<{OPTIONS_PAD}} - {v}")
         elif option == "coins":
             save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
         elif option == "discard":

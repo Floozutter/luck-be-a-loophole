@@ -41,8 +41,8 @@ OPTIONS = {
     "coins": "edit number of coins",
     "removals": "edit number of removal tokens",
     "rerolls": "edit number of reroll tokens",
-    "enqueue_item": "enqueue an item by name",
-    "enqueue_symbol": "enqueue a symbol by name",
+    "add_item": "enqueue an item by name",
+    "add_symbol": "enqueue a symbol by name",
     "discard": "exit without writing to outsavefile",
     "write": "exit and write to outsavefile",
 }
@@ -60,10 +60,10 @@ def menu(save: Save) -> bool:
             save.removals = int(prompt("removal tokens", str(save.removals), is_nat))
         elif option == "rerolls":
             save.rerolls = int(prompt("reroll tokens", str(save.rerolls), is_nat))
-        elif option == "enqueue_item":
-            save.enqueue_item(prompt("item name"))
-        elif option == "enqueue_symbol":
-            save.enqueue_symbol(prompt("symbol name"))
+        elif option == "add_item":
+            save.add_item(prompt("item name"))
+        elif option == "add_symbol":
+            save.add_symbol(prompt("symbol name"))
         elif option == "discard":
             return False
         elif option == "write":

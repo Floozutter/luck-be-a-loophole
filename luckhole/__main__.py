@@ -55,6 +55,10 @@ def menu(save: Save) -> bool:
                 print(f"{k:<{max(map(len, OPTIONS))}} - {v}")
         elif option == "coins":
             save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
+        elif option == "removals":
+            save.removals = int(prompt("removals", str(save.removals), lambda s: s.isdigit()))
+        elif option == "rerolls":
+            save.rerolls = int(prompt("rerolls", str(save.rerolls), lambda s: s.isdigit()))
         elif option == "discard":
             return False
         elif option == "write":

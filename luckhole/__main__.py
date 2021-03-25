@@ -41,8 +41,8 @@ OPTIONS = {
     "coins": "edit number of coins",
     "removals": "edit number of removal tokens",
     "rerolls": "edit number of reroll tokens",
-    "add_item": "enqueue an item by name",
-    "add_symbol": "enqueue a symbol by name",
+    "add_item": "add an item by name",
+    "add_symbol": "add a symbol by name",
     "discard": "exit without writing to outsavefile",
     "write": "exit and write to outsavefile",
 }

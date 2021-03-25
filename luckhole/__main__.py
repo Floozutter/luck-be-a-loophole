@@ -61,9 +61,13 @@ def menu(save: Save) -> bool:
         elif option == "rerolls":
             save.rerolls = int(prompt("reroll tokens", str(save.rerolls), is_nat))
         elif option == "add_item":
-            save.add_item(prompt("item name"))
+            name = prompt("item name")
+            for _ in range(prompt("quantity", "1", is_nat)):
+                save.add_item(name)
         elif option == "add_symbol":
-            save.add_symbol(prompt("symbol name"))
+            name = prompt("symbol name")
+            for _ in range(prompt("quantity", "1", is_nat)):
+                save.add_symbol(symbol)
         elif option == "discard":
             return False
         elif option == "write":

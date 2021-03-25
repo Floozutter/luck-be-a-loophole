@@ -46,14 +46,13 @@ OPTIONS = {
     "discard": "exit without writing to outsavefile",
     "write": "exit and write to outsavefile",
 }
-OPTIONS_PAD = max(map(len, OPTIONS))
 def menu(save: Save) -> bool:
     """handles main menu i/o. returns True to write, and False to discard."""
     while True:
         option = prompt("\noption", "help", lambda s: s in OPTIONS)
         if option == "help":
             for k, v in OPTIONS.items():
-                print(f"{k:<{OPTIONS_PAD}} - {v}")
+                print(f"{k:<{max(map(len, OPTIONS))}} - {v}")
         elif option == "coins":
             save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
         elif option == "discard":

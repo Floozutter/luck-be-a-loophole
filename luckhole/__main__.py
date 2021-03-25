@@ -36,10 +36,33 @@ def prompt(
         elif valid(value):
             return value
 
-def menu(save: Save) -> None:
+OPTIONS = {
+    "help": "show and describe all options",
+    "coins": "edit number of coins",
+    "removals": "edit number of removal tokens",
+    "rerolls": "edit number of reroll tokens",
+    "enqueue-item": "enqueue an item by name",
+    "enqueue-symbol": "enqueue a symbol by name",
+    "discard": "exit without writing to outsavefile",
+    "write": "exit and write to outsavefile",
+}
+OPTIONS_PAD = max(map(len, OPTIONS))
+def menu(save: Save) -> bool:
     """handles main menu i/o. returns True to write, and False to discard."""
-    save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
-    return True
+    while True:
+        option = prompt("\noption", "help", lambda s: s in OPTIONS)
+        if option == "help":
+            for opt, description in OPTIONS.items():
+                print(f"{opt:<{OPTIONS_PAD}} - {description}")
+        elif option == "coins":
+            save.coins = int(prompt("coins", str(save.coins), lambda s: s.isdigit()))
+        elif option == "discard":
+            return False
+        elif option == "write":
+            return True
+        elif option in OPTIONS:
+            print("sorry, not implemented yet!")
+    raise AssertionError("how did you get here?")
 
 def main(insavefile: str, outsavefile: str) -> int:
     # read encoded save from insavefile
@@ -62,9 +85,8 @@ def main(insavefile: str, outsavefile: str) -> int:
     else:
         print("done.")
     # edit save with menu
-    print("entering edit menu...", end = "\n\n")
+    print("entering edit menu...")
     write = menu(save)
-    print()
     # write edited save to outsavefile if not discarded
     if write:
         print(f"writing to `{outsavefile}`...", end = " ")

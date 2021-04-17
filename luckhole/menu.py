@@ -1,4 +1,5 @@
 from . import Save
+from typing import Callable, Optional
 
 def prompt(
     name: str,

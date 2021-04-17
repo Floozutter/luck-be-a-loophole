@@ -2,7 +2,8 @@
 a save editor for Luck Be a Landlord!
 """
 
-from . import Save
+from luckhole.menu import menu
+from luckhole import Save
 from json import JSONDecodeError
 from argparse import ArgumentParser
 from sys import exit
